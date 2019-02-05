@@ -214,7 +214,7 @@ public class AgentAttacher {
 			agentBuilder = agentBuilder
 					.type(transformer.getMatcher())
 					.transform(transformer.getTransformer())
-					.asDecorator();
+					.asTerminalTransformation();
 		}
 
 		final long start = System.currentTimeMillis();
