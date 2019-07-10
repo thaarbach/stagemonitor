@@ -213,8 +213,7 @@ public class AgentAttacher {
 		for (StagemonitorByteBuddyTransformer transformer : getStagemonitorByteBuddyTransformers()) {
 			agentBuilder = agentBuilder
 					.type(transformer.getMatcher())
-					.transform(transformer.getTransformer())
-					.asTerminalTransformation();
+					.transform(transformer.getTransformer());
 		}
 
 		final long start = System.currentTimeMillis();
@@ -235,6 +234,7 @@ public class AgentAttacher {
 				.with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
 				.with(getListener())
 				.with(binaryLocator)
+				.with(AgentBuilder.TypeStrategy.Default.DECORATE)
 				.ignore(any(), timed("classloader", "reflection", isReflectionClassLoader()))
 				.or(any(), timed("classloader", "groovy-call-site", classLoaderWithName("org.codehaus.groovy.runtime.callsite.CallSiteClassLoader")))
 				.or(any(), new IsIgnoredClassLoaderElementMatcher())
