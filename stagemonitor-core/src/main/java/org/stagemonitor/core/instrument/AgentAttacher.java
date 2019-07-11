@@ -234,7 +234,6 @@ public class AgentAttacher {
 				.with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
 				.with(getListener())
 				.with(binaryLocator)
-				.with(AgentBuilder.TypeStrategy.Default.DECORATE)
 				.ignore(any(), timed("classloader", "reflection", isReflectionClassLoader()))
 				.or(any(), timed("classloader", "groovy-call-site", classLoaderWithName("org.codehaus.groovy.runtime.callsite.CallSiteClassLoader")))
 				.or(any(), new IsIgnoredClassLoaderElementMatcher())
